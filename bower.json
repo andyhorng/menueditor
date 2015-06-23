@@ -1,0 +1,22 @@
+{
+  "name": "menueditor",
+  "version": "0.0.0",
+  "authors": [
+    "洪盟翔 <andy@eztable.com.tw>"
+  ],
+  "description": "menueditor for sipit",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.1",
+    "iron-form": "PolymerElements/iron-form#~1.0.3",
+    "iron-iconset": "PolymerElements/iron-iconset#~1.0.2"
+  }
+}

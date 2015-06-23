@@ -1,0 +1,50 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/iron-ajax/iron-ajax.html">
+<link rel="import" href="components/iron-icon/iron-icon.html">
+<link rel="import" href="components/iron-icons/maps-icons.html">
+<link rel="import" href="components/paper-item/paper-icon-item.html">
+<link rel="import" href="components/paper-item/paper-item-body.html">
+
+<dom-module id="menu-list">
+  <template>
+    <iron-ajax id="req" auto url="/api/menu"
+    handle-as="json" last-response="{{menus}}"></iron-ajax>
+
+    <ul>
+      <template is="dom-repeat" items="[[menus]]">
+      <paper-icon-item on-tap="_itemTapHandler" menuid$="[[item.id]]">
+          <iron-icon icon="maps:restaurant-menu" item-icon></iron-icon>
+          <paper-item-body two-line>
+            <div>{{item.name}}</div>
+            <div secondary>{{item.address}}</div>
+          </paper-item-body>
+        </paper-icon-item>
+      </template>
+    </ul>
+  </template>
+
+
+  <script>
+    Polymer({
+      is: 'menu-list',
+      ready: function() {
+        this.menus = [];
+      },
+      properties: {
+          menus: {
+              type: Array,
+              notify: true,
+          }
+      },
+      _itemTapHandler: function (e) {
+        this.fire('menu-tap', {
+          menu: e.model.item
+        });
+      },
+      reload: function() {
+          this.$.req.generateRequest();
+      },
+    });
+  </script>
+
+</dom-module>
