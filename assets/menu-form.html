@@ -9,36 +9,36 @@
 
 <dom-module id="menu-form">
 
-  <style>
+<style>
 
-    .item paper-input {
-      display: inline-block;
-      margin-left: 1em;
-      margin-right: 1em;
-    }
+.item paper-input {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+}
 
-    .item .del {
-        color: var(--paper-red-500);
-    }
+.item .del {
+  color: var(--paper-red-500);
+}
 
-  </style>
+</style>
 
-  <template>
-    <iron-ajax id="menuResource" url="{{url}}" handle-as="json" last-response="{{menu}}"></iron-ajax>
-    <paper-dialog id="delDialog">
+<template>
+  <iron-ajax id="menuResource" url="{{url}}" handle-as="json" last-response="{{menu}}"></iron-ajax>
+  <paper-dialog id="delDialog">
     <p>Are you sure?</p>
-      <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button on-tap="del" dialog-confirm autofocus>OK</paper-button>
-      </div>
-    </paper-dialog>
+    <div class="buttons">
+      <paper-button dialog-dismiss>Cancel</paper-button>
+      <paper-button on-tap="del" dialog-confirm autofocus>OK</paper-button>
+    </div>
+  </paper-dialog>
 
-    <form is="iron-form" id="menuForm">
-      <paper-toolbar>
+  <form is="iron-form" id="menuForm">
+    <paper-toolbar>
       <div class="title">{{menu.name}}</div>
-        <paper-icon-button icon="done" on-tap="submit"></paper-icon-button>
-        <paper-icon-button icon="delete" on-tap="openDel"></paper-icon-button>
-      </paper-toolbar>
+      <paper-icon-button icon="done" on-tap="submit"></paper-icon-button>
+      <paper-icon-button icon="delete" on-tap="openDel"></paper-icon-button>
+    </paper-toolbar>
 
     <div>
 
@@ -50,16 +50,16 @@
       <paper-material elevation="2">
         <template id="menuItems" is="dom-repeat" items="{{menu.items}}" on-dom-change="itemsUpdated">
           <div class="item">
-          <paper-input label="Item Name" value="{{item.name}}" required></paper-input>
-          <paper-input label="Item Price" value="{{item.price}}" required></paper-input>
-          <paper-icon-button class="del" on-tap="removeItem" icon="clear" alt="clear"></paper-button>
-          </div>
-          <!-- <paper-input label="Price" value="[[item.price]]" required></paper-input> -->
-        </template>
-        <paper-button class="add" on-tap="addItem" raised>Add</paper-button>
-      </div>
+            <paper-input label="Item Name" value="{{item.name}}" required></paper-input>
+            <paper-input label="Item Price" value="{{item.price}}" required></paper-input>
+            <paper-icon-button class="del" on-tap="removeItem" icon="clear" alt="clear"></paper-button>
+            </div>
+            <!-- <paper-input label="Price" value="[[item.price]]" required></paper-input> -->
+          </template>
+          <paper-button class="add" on-tap="addItem" raised>Add</paper-button>
+        </div>
 
-    </paper-material>
+      </paper-material>
 
 
     </form>
@@ -67,67 +67,67 @@
   </template>
 
   <script>
-    Polymer({
-      is: 'menu-form',
-      ready: function() {
-        this.url = "/api/menu/" + this.menuid;
+  Polymer({
+    is: 'menu-form',
+    ready: function() {
+      this.url = "/api/menu/" + this.menuid;
+    },
+    properties: {
+      menuid: {
+        type: String,
+        notify: true,
+        observer: '_menuidChanged'
       },
-      properties: {
-        menuid: {
-          type: String,
-          notify: true,
-          observer: '_menuidChanged'
-        },
-        menu: {
-          type: Object,
-          notify: true,
-        }
-      },
-      _menuidChanged: function (value, oldValue) {
-        this.url = "/api/menu/" + value;
-        this.$.menuResource.generateRequest();
-      },
-      submit: function (e) {
-        // this.$.menuForm.submit();
-        var json = this.$.menuForm.serialize();
-        json.items = this.$.menuItems.items;
-
-        var request = new XMLHttpRequest();
-        request.open('PATCH', this.url, json);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(json));
-      },
-      openDel: function(e) {
-        this.$.delDialog.open();
-      },
-      del: function (e) {
-        var request = new XMLHttpRequest();
-        request.open('DELETE', this.url);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send();
-        // TODO: callback on request success
-        fire = function() {
-          this.fire('deleted', this.menu);
-        }
-        window.setTimeout(fire.bind(this), 1000);
-      },
-      addItem: function (e) {
-        this.push('menu.items', {});
-      },
-      removeItem: function (e) {
-        this.splice('menu.items', e.model.index, 1);
-      },
-      itemsUpdated: function (e) {
-        var items = Polymer.dom(this.root).querySelectorAll(".item");
-        var last = items[items.length-1];
-        this.async(function () {
-          if (!last) {
-            return;
-          }
-          last.querySelector("paper-input").inputElement.focus();
-        });
+      menu: {
+        type: Object,
+        notify: true,
       }
-    });
+    },
+    _menuidChanged: function (value, oldValue) {
+      this.url = "/api/menu/" + value;
+      this.$.menuResource.generateRequest();
+    },
+    submit: function (e) {
+      // this.$.menuForm.submit();
+      var json = this.$.menuForm.serialize();
+      json.items = this.$.menuItems.items;
+
+      var request = new XMLHttpRequest();
+      request.open('PATCH', this.url, json);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(json));
+    },
+    openDel: function(e) {
+      this.$.delDialog.open();
+    },
+    del: function (e) {
+      var request = new XMLHttpRequest();
+      request.open('DELETE', this.url);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send();
+      // TODO: callback on request success
+      fire = function() {
+        this.fire('deleted', this.menu);
+      }
+      window.setTimeout(fire.bind(this), 1000);
+    },
+    addItem: function (e) {
+      this.push('menu.items', {});
+    },
+    removeItem: function (e) {
+      this.splice('menu.items', e.model.index, 1);
+    },
+    itemsUpdated: function (e) {
+      var items = Polymer.dom(this.root).querySelectorAll(".item");
+      var last = items[items.length-1];
+      this.async(function () {
+        if (!last) {
+          return;
+        }
+        last.querySelector("paper-input").inputElement.focus();
+      });
+    }
+  });
   </script>
 
 </dom-module>

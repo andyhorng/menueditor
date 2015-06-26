@@ -12,7 +12,7 @@
 
     <ul>
       <template is="dom-repeat" items="[[menus]]">
-      <paper-icon-item on-tap="_itemTapHandler" menuid$="[[item.id]]">
+        <paper-icon-item on-tap="_itemTapHandler" menuid$="[[item.id]]">
           <iron-icon icon="maps:restaurant-menu" item-icon></iron-icon>
           <paper-item-body two-line>
             <div>{{item.name}}</div>
@@ -25,26 +25,26 @@
 
 
   <script>
-    Polymer({
-      is: 'menu-list',
-      ready: function() {
-        this.menus = [];
-      },
-      properties: {
-          menus: {
-              type: Array,
-              notify: true,
-          }
-      },
-      _itemTapHandler: function (e) {
-        this.fire('menu-tap', {
-          menu: e.model.item
-        });
-      },
-      reload: function() {
-          this.$.req.generateRequest();
-      },
-    });
+  Polymer({
+    is: 'menu-list',
+    ready: function() {
+      this.menus = [];
+    },
+    properties: {
+      menus: {
+        type: Array,
+        notify: true,
+      }
+    },
+    _itemTapHandler: function (e) {
+      this.fire('menu-tap', {
+        menu: e.model.item
+      });
+    },
+    reload: function() {
+      this.$.req.generateRequest();
+    },
+  });
   </script>
 
 </dom-module>
