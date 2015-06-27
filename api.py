@@ -36,7 +36,7 @@ def patch(menu_id):
     key = ndb.Key('Menu', int(menu_id))
     data = request.get_json(force=True)
     menu = key.get()
-    menu.update_from_dict(data)
+    menu.populate(**data)
     menu.put()
 
     return ""

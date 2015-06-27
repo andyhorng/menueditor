@@ -16,40 +16,40 @@
           <form is="iron-form" id="newForm" method="POST" action="/api/menu"
           on-iron-form-response="handleResponse">
           <paper-input name="name" label="Name" required></paper-input>
-          <paper-button on-tap="submit" raised><iron-icon icon="add"></paper-button>
-            <form>
-            </div>
-            <div>
-              <menu-list id="menuList" on-menu-tap="_menuTapHandler"></menu-list>
-            </div>
+          <paper-button on-tap="submit" raised><iron-icon icon="add"></iron-icon></paper-button>
+          <form>
           </div>
-          <div main>
-            <menu-form id="form" on-deleted="deleted"></menu-form>
+          <div>
+            <menu-list id="menuList" on-menu-tap="_menuTapHandler"></menu-list>
           </div>
+        </div>
+        <div main style="overflow: scroll">
+          <menu-form id="form" on-deleted="deleted"></menu-form>
+        </div>
 
-        </paper-drawer-panel>
-      </template>
+      </paper-drawer-panel>
+    </template>
 
-      <script>
-      Polymer({
-        is: 'menu-editor',
-        ready: function () {
-          this.$.form.style.visibility = "hidden";
-        },
-        _menuTapHandler: function (e) {
-          this.$.form.style.visibility = "visible";
-          this.$.form.set('menuid', e.detail.menu.id);
-        },
-        handleResponse: function(e) {
-          this.$.menuList.reload();
-        },
-        submit: function(e) {
-          this.$.newForm.submit();
-        },
-        deleted: function(e) {
-          this.$.menuList.reload();
-        }
-      });
-      </script>
+    <script>
+    Polymer({
+      is: 'menu-editor',
+      ready: function () {
+        this.$.form.style.visibility = "hidden";
+      },
+      _menuTapHandler: function (e) {
+        this.$.form.style.visibility = "visible";
+        this.$.form.set('menuid', e.detail.menu.id);
+      },
+      handleResponse: function(e) {
+        this.$.menuList.reload();
+      },
+      submit: function(e) {
+        this.$.newForm.submit();
+      },
+      deleted: function(e) {
+        this.$.menuList.reload();
+      }
+    });
+    </script>
 
-    </dom-module>
+  </dom-module>
