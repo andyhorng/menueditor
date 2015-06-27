@@ -9,7 +9,7 @@ app.config['DEBUG'] = True
 @app.route('/api/menu', methods=["POST"])
 def create():
     data = request.get_json(force=True)
-    menu = Menu(name=data['name'], address="", items=[])
+    menu = Menu(**data)
     key = menu.put()
 
     return redirect(url_for('get', menu_id=key.id()))
@@ -47,4 +47,3 @@ def delete(menu_id):
     key.delete()
 
     return ""
-
