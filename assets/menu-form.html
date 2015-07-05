@@ -91,8 +91,9 @@ paper-material {
             <paper-item value="sun">Sun</paper-item>
           </paper-menu>
 
-          <paper-input label="Start" value="{{item.start}}" required></paper-input>
-          <paper-input label="End" value="{{item.end}}" required></paper-input>
+          <paper-input label="00:00" value="{{item.start}}" required></paper-input>
+          To
+          <paper-input label="23:59" value="{{item.end}}" required></paper-input>
 
           <paper-icon-button class="del" on-tap="removeBusinessHour" icon="clear" alt="clear"></paper-button>
           </div>
@@ -107,7 +108,28 @@ paper-material {
         <div class="item">
           <paper-input label="Item Name" value="{{item.name}}" required></paper-input>
           <paper-input label="Item Price" value="{{item.price}}" required></paper-input>
+
+          <paper-icon-button on-tap="showCustom" icon="menu" alt="menu"></paper-button>
           <paper-icon-button class="del" on-tap="removeItem" icon="clear" alt="clear"></paper-button>
+
+          <paper-dialog>
+            <p>
+              <paper-menu multi attr-for-selected="value" selected-values="{{item.customs.temperature}}">
+                <paper-item value="cold">冷</paper-item>
+                <paper-item value="hot">熱</paper-item>
+              </paper-menu>
+            </p>
+            <p>
+              <paper-menu multi attr-for-selected="value" selected-values="{{item.customs.ice}}">
+                <paper-item value="normal">正常</paper-item>
+                <paper-item value="little">少冰</paper-item>
+              </paper-menu>
+            </p>
+            <div class="buttons">
+              <paper-button dialog-confirm autofocus>OK</paper-button>
+            </div>
+          </paper-dialog>
+
           </div>
         </template>
         <paper-button class="add" on-tap="addItem" raised>Add</paper-button>
@@ -184,7 +206,9 @@ Polymer({
       }
       last.querySelector("paper-input").inputElement.focus();
     });
-  }
+  },
+  showCustom: function (e) {
+  },
 });
 </script>
 
