@@ -1,0 +1,21 @@
+<div class="row" ng-controller="MenuListController as ctrl">
+
+  <div class="col-sm-2">
+
+    <button type="button" class="btn btn-primary" ng-click="ctrl.newMenu()">Add</button>
+
+  </div>
+
+  <div class="col-sm-10">
+        <div class="row" ng-repeat="menu in ctrl.menus">
+            <span class="col-sm-10">{{menu.name}} </span>
+            <div class="col-sm-2">
+              <a class="btn btn-info" ui-sref="menu({id: menu.id})">Edit</a>
+              <button class="btn btn-danger" ng-click="ctrl.deleteMenu($index, menu.id)">Delete</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>
+

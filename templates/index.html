@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="" ng-app="menuEditorApp">
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
@@ -7,17 +7,25 @@
 
   <title>Menu Editor</title>
 
-  <link rel="stylesheet" href="assets/css/main.css">
 
-  <style>
-  </style>
+  <link rel="stylesheet" href="/assets/components/angular-bootstrap/ui-bootstrap-csp.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/assets/components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/assets/js/editor.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 
-<script>
-
-</script>
-
 <body>
+
+    <div ng-controller="AlertController as ctrl" class="pull-right" >
+        <alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+    </div>
+
+    <div ui-view class="container">
+    </div>
+
 </body>
 </html

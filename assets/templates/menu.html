@@ -1,0 +1,114 @@
+<div class="row" ng-controller="MenuController as ctrl">
+
+  <div class="col-sm-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <button class="btn btn-primary" type="button" ng-click="ctrl.save(ctrl.menu)">Save</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-10">
+    <form class="form-horizontal">
+
+      <accordion>
+        <accordion-group heading="Basic">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Name</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="name" ng-model="ctrl.menu.name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Addresses</label>
+
+            <div class="col-sm-10">
+              <ul class="list-unstyled">
+                <li ng-repeat="addr in ctrl.menu.addresses">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <input class="form-control" type="text" placeholder="Name" ng-model="addr.name" />
+                    </div>
+                    <div class="col-sm-7">
+                      <input class="form-control" type="text" placeholder="Address" ng-model="addr.address" />
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-danger" ng-click="ctrl.removeAddress($index)">Remove</button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <button class="btn btn-info" ng-click="ctrl.addAddress()">New Address</button>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Business Hours</label>
+              <div class="col-sm-10">
+                <ul class="list-unstyled">
+                  <li ng-repeat="time in ctrl.menu.business_hours">
+
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <select multiple ng-multiple="true" ng-model="time.days" 
+                          ng-options="c for c in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']" size="7" style="">
+                        </select>
+                      </div>
+
+                      <div class="col-sm-3">
+                        <timepicker ng-model="time.start" minute-step="30"></timepicker>
+                      </div>
+                      <div class="col-sm-3">
+                        <timepicker ng-model="time.end" minute-step="30"></timepicker>
+                      </div>
+
+                      <div class="col-sm-3">
+                        <button class="btn btn-danger" ng-click="ctrl.removeBusinessHour($index)">Remove</button>
+                      </div>
+                    </div>
+                    <hr />
+
+                  </li>
+                </ul>
+
+                <button class="btn btn-info" ng-click="ctrl.addBusinessHour()">New Business Hour</button>
+
+              </div>
+            </div>
+          </div>
+          </accordion-group>
+
+          <accordion-group heading="Items">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Items</label>
+              <div class="col-sm-10">
+                <ul class="list-unstyled">
+                  <li ng-repeat="item in ctrl.menu.items">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text" autofocus placeholder="Name" ng-model="item.name" />
+                      </div>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="number" placeholder="Price" ng-model="item.price" />
+                      </div>
+                      <div class="col-sm-4">
+                        <button class="btn btn-danger" ng-click="ctrl.removeItem($index)">Remove</button>
+                      </div>
+                      <hr />
+                    </div>
+                  </li>
+                </ul>
+
+                <button type="button" class="btn btn-info" ng-click="ctrl.addItem()">Add Item</button>
+              </div>
+            </div>
+          </accordion-group>
+
+        </accordion>
+
+    </form>
+  </div>
+
+</div>

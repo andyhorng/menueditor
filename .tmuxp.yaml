@@ -1,0 +1,16 @@
+session_name: menueditor
+windows:
+  - window_name: build
+    layout: tiled
+    panes:
+      - shell_command:
+        - cd ./assets
+        - coffee -w --output js coffee
+      - gcloud preview app run ./app.yaml
+      - pwd
+      - pwd
+
+  - window_name: editor
+    panes:
+      - shell_command: 
+        - vim
