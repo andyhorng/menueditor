@@ -3,7 +3,8 @@
   <div class="col-sm-2">
     <div class="panel panel-default">
       <div class="panel-body">
-      <button class="btn btn-primary" type="button" ng-click="ctrl.save(ctrl.menu)">Save</button>
+        <a ui-sref="list()">Back</a>
+        <button class="btn btn-primary" type="button" ng-click="ctrl.save(ctrl.menu)">Save</button>
       </div>
     </div>
   </div>
@@ -12,7 +13,7 @@
   <div class="col-sm-10">
     <form class="form-horizontal">
 
-      <accordion>
+      <accordion close-others="false">
         <accordion-group heading="Basic">
           <div class="form-group">
             <label class="col-sm-2 control-label" for="name">Name</label>
@@ -84,22 +85,47 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Items</label>
               <div class="col-sm-10">
-                <ul class="list-unstyled">
-                  <li ng-repeat="item in ctrl.menu.items">
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <input class="form-control" type="text" autofocus placeholder="Name" ng-model="item.name" />
-                      </div>
-                      <div class="col-sm-4">
-                        <input class="form-control" type="number" placeholder="Price" ng-model="item.price" />
-                      </div>
-                      <div class="col-sm-4">
-                        <button class="btn btn-danger" ng-click="ctrl.removeItem($index)">Remove</button>
-                      </div>
-                      <hr />
+                <div ng-repeat="item in ctrl.menu.items">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <input class="form-control" type="text" autofocus placeholder="Name" ng-model="item.name" />
                     </div>
-                  </li>
-                </ul>
+                    <div class="col-sm-2">
+                      <input class="form-control" type="number" placeholder="Price" ng-model="item.price" />
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p>溫度</p>
+                          <select multiple ng-multiple="true" ng-model="item.customs.hotcold" 
+                            ng-options="v for v in ctrl.customs.hotcold" size="5" style="">
+                          </select>
+                        </div>
+                        <div class="col-sm-3">
+                          <p>冰塊</p>
+                          <select multiple ng-multiple="true" ng-model="item.customs.ice" 
+                            ng-options="v for v in ctrl.customs.ice" size="5" style="">
+                          </select>
+                        </div>
+                        <div class="col-sm-3">
+                          <p>甜度</p>
+                          <select multiple ng-multiple="true" ng-model="item.customs.sweet" 
+                            ng-options="v for v in ctrl.customs.sweet" size="5" style="">
+                          </select>
+                        </div>
+                        <div class="col-sm-3">
+                          <p>大小</p>
+                          <select multiple ng-multiple="true" ng-model="item.customs.size" 
+                            ng-options="v for v in ctrl.customs.size" size="5" style="">
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-danger" ng-click="ctrl.removeItem($index)">Remove</button>
+                    </div>
+                  </div>
+                </div>
 
                 <button type="button" class="btn btn-info" ng-click="ctrl.addItem()">Add Item</button>
               </div>

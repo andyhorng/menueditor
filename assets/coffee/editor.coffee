@@ -91,10 +91,16 @@ angular.module("menuEditorApp", ['ui.bootstrap', 'ui.router'])
 
         @addItem = () =>
             @menu.items ||= []
-            @menu.items.push({})
+            @menu.items.push({customs: angular.copy(@customs)})
 
         @removeItem = (ix) =>
             @menu.items.splice(ix, 1)
+
+        @customs =
+            hotcold: ['冷', '熱']
+            ice: ['正常', '少冰', '微冰', '去冰']
+            sweet: ['正常', '少糖', '半糖', '微糖', '無糖']
+            size: ['小', '中', '大', '特大', '巨無霸']
 
 
         return @

@@ -102,7 +102,9 @@
       return function() {
         var base;
         (base = _this.menu).items || (base.items = []);
-        return _this.menu.items.push({});
+        return _this.menu.items.push({
+          customs: angular.copy(_this.customs)
+        });
       };
     })(this);
     this.removeItem = (function(_this) {
@@ -110,6 +112,12 @@
         return _this.menu.items.splice(ix, 1);
       };
     })(this);
+    this.customs = {
+      hotcold: ['冷', '熱'],
+      ice: ['正常', '少冰', '微冰', '去冰'],
+      sweet: ['正常', '少糖', '半糖', '微糖', '無糖'],
+      size: ['小', '中', '大', '特大', '巨無霸']
+    };
     return this;
   }).controller("AlertController", function($rootScope, $timeout) {
     this.alerts = [];
