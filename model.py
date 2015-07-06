@@ -12,6 +12,7 @@ class Menu(ndb.Model):
     items = ndb.JsonProperty(default=[])
     business_hours = ndb.JsonProperty(default=[])
     addresses = ndb.JsonProperty(default=[])
+    tel = ndb.StringProperty()
 
     def to_dict(self):
         rt = ndb.Model.to_dict(self)
